@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import './NavBar.css';
 import instagramIcon from '../assets/images/instagram-icon.svg';
@@ -13,6 +13,7 @@ const ADMIN_EMAILS = ['televisionneverenough@gmail.com', 'test@nobles.com', 'nob
 const NavBar = () => {
   const location = useLocation();
   const path = location.pathname;
+  const navigate = useNavigate();
 
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -51,7 +52,7 @@ const NavBar = () => {
     localStorage.removeItem('noblesTestUser');
     window.dispatchEvent(new Event('nobles-auth-change'));
     window.dispatchEvent(new Event('nobles-membership-change'));
-    window.location.href = ROUTES.LOGIN;
+    navigate(ROUTES.LOGIN);
   };
 
   return (
